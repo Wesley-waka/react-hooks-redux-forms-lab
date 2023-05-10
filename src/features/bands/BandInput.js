@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import band from "./BandsContainer";
 
 function BandInput({ onBandSubmit }) {
   const [name, setName] = useState("");

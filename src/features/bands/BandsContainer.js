@@ -3,34 +3,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { bandAdded } from "./bandsSlice";
 import BandInput from "./BandInput";
 
-export const bandInput = () => {
-  return (<BandInput
-    bandName={bandName}
-    setBandName={setBandName}
-    onBandSubmit={handleBandSubmit}
-  />)
-}
+// export const bandInput = () => {
+//   return (<BandInput
+//     bandName={bandName}
+//     setBandName={setBandName}
+//     onBandSubmit={handleBandSubmit}
+//   />)
+// }
 function BandsContainer() {
   const dispatch = useDispatch();
-  const [bandName, setBandName] = useState("");
-
-  const handleBandSubmit = (event) => {
-    event.preventDefault();
-    dispatch(bandAdded(bandName));
-    setBandName("");
-  };
-
   const bandNames = useSelector((state) => state.bands.entities);
 
+  const handleBandSubmit = (bandName) => {
+    dispatch(bandAdded(bandName));
+  };
+
+
   return (
-    <>
-
+    <div>
+      <BandInput onBandSubmit={handleBandSubmit} />
       <div>BandsContainer</div>
-
-      {bandNames.map((band, index) => (
-        <li key={index}>{band}</li>
-      ))}
-    </>
+      <ul>
+        {bandNames.map((band) => (
+          <li key={band}>{band}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
